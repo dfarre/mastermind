@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    command: bash runserver.sh
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=mastermind.settings.dev
+  db:
+    image: postgres:10
+    environment:
+      - PGPORT=5433
+    ports:
+      - 5433:5433

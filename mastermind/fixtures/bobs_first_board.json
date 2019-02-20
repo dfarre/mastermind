@@ -1,0 +1,11 @@
+[
+  {
+      "model": "mastermind.Board",
+      "pk": 2,
+      "fields": {
+          "game": 2,
+          "number": 1,
+          "code": ["P", "Y", "P", "Y"]
+      }
+  }
+]

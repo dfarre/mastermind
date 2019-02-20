@@ -1,0 +1,11 @@
+[
+  {
+      "model": "mastermind.Game",
+      "pk": 1,
+      "fields": {
+          "codebreaker": 1,
+          "last_board": 2,
+          "board_size": 3
+      }
+  }
+]
