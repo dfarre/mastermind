@@ -13,7 +13,7 @@ class BaseGame(models.Model):
         abstract = True
 
     def round(self):
-        getattr(self, f'{self.round_object}_set').order_by('number').last()
+        return getattr(self, f'{self.round_object}_set').order_by('number').last()
 
 
 class Round(models.Model):

@@ -1,3 +1,5 @@
+import os
+
 from mastermind.unit_tests.base import AuthenticatedApiTestCase
 
 from bdd_coder.tester import decorators
@@ -6,7 +8,7 @@ from bdd_coder.tester import tester
 from . import steps
 
 
-@decorators.Steps(steps.MAP)
+@decorators.Steps(steps.MAP, os.path.dirname(os.path.abspath(__file__)))
 class BddApiTestCase(tester.BddTestCase, AuthenticatedApiTestCase):
     def not_your_game_400(self, *args, **kwargs):
         response = (self.steps.outputs.get('board') or self.steps.outputs.get('guess'))[-1]

@@ -72,9 +72,9 @@ class MakingGuesses(NewGame):
         """
         Given I post a `guess` with code "BYGY"
         And I post a `guess` with code "RBGG"
-        Then the guess "1" is added with feedback "FFFF"
-        And I get a 400 response from guess "2" saying I already guessed the code
-        And my score is "4" against "1"
+        Then the guess "-2" is added with feedback "FFFF"
+        And I get a 400 response from guess "-1" saying I already guessed the code
+        And my score is "9" against "5"
         """
 
     @decorators.scenario
@@ -115,16 +115,16 @@ class MakingGuesses(NewGame):
 
     def i_get_a_400_response_from_guess__saying_i_already_guessed_the_code(
             self, *args, **kwargs):
-        expected_number = int(args[1])
-        response = self.steps.outputs['guess'][expected_number - 1]
+        guess_index = int(args[0])
+        response = self.steps.outputs['guess'][guess_index]
 
         assert response.status_code == 400
         assert response.json() == {'non_field_errors': ['You already guessed the code!']}
 
     def my_score_is__against_(self, *args, **kwargs):
-        expected_breaker_score, expected_maker_score = args
+        expected_breaker_score, expected_maker_score = map(int, args)
         game_id = self.steps.outputs['game'][-1].json()['id']
-        game = self.client.get(f'/games/{game_id}')
+        game = self.client.get(f'/games/{game_id}/').json()
 
         assert game['breaker_score'] == expected_breaker_score
         assert game['maker_score'] == expected_maker_score
@@ -196,10 +196,9 @@ class ClearBoard(MakingGuesses):
 
     def i_get_a_400_response_with_the_board_number_and_guesses_left(self, *args, **kwargs):
         response = self.steps.outputs['board'][-1]
-        json_response = response.json()
 
         assert response.status_code == 400
-        assert json_response == {'non_field_errors': ['You have  guesses left on board !']}
+        assert response.json() == {'non_field_errors': ['You have  guesses left on board !']}
 
     def all_boards_are_over(self, *args, **kwargs):
         self.there_is_an_unfinished_board()
@@ -213,7 +212,7 @@ class ClearBoard(MakingGuesses):
 
         assert response.status_code == 400
         assert json_response == {'non_field_errors': [
-            'Game is over, all boards completed! Breaker 5 - Maker 4']}
+            'Game is over, all boards completed! Breaker 9 - Maker 5']}
 
     def the_next_board_is_added_to_the_game(self, *args, **kwargs):
         game_id = self.steps.outputs['game'][-1].json()['id']

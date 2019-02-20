@@ -10,3 +10,5 @@ build
 .tox
 
 db.sqlite3
+
+history.log
