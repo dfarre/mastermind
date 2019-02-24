@@ -1,7 +1,7 @@
 import setuptools
 
 
-tests_require = ['pytest']
+tests_require = ['pytest', 'pytest-cov']
 
 setuptools.setup(
     name='mastermind',
