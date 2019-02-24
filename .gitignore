@@ -11,4 +11,4 @@ build
 
 db.sqlite3
 
-history.log
+.bdd-run-logs

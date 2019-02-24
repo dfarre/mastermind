@@ -38,9 +38,8 @@ class BoardSerializer(serializers.ModelSerializer):
         if board:
             if not board.winner:
                 raise exceptions.ValidationError(
-                    'You have %(guesses)i guesses left on board %(board)i!', params={
-                        'guesses': data['game'].board_size - board.round().number,
-                        'board': board.number})
+                    f'You have {data["game"].board_size - board.round().number} '
+                    f'guess(es) left on board {board.number}!')
             elif board.number == data['game'].last_board:
                 (l, ls), (w, ws) = data['game'].rankings
 

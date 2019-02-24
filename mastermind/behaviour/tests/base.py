@@ -1,17 +1,23 @@
 import os
 
-from mastermind.unit_tests.base import AuthenticatedApiTestCase
-
 from bdd_coder.tester import decorators
 from bdd_coder.tester import tester
 
-from . import steps
+from mastermind.unit_tests.base import AuthenticatedApiTestCase
+
+from . import aliases
+
+steps = decorators.Steps(aliases.MAP, os.path.dirname(os.path.abspath(__file__)))
 
 
-@decorators.Steps(steps.MAP, os.path.dirname(os.path.abspath(__file__)))
-class BddApiTestCase(tester.BddTestCase, AuthenticatedApiTestCase):
-    def not_your_game_400(self, *args, **kwargs):
+@steps
+class BddTester(tester.BddTester):
+    def not_your_game_400(self):
         response = (self.steps.outputs.get('board') or self.steps.outputs.get('guess'))[-1]
 
         assert response.status_code == 400
         assert response.json() == {'non_field_errors': ['Not your game!']}
+
+
+class BaseTestCase(tester.BaseTestCase, AuthenticatedApiTestCase):
+    pass
