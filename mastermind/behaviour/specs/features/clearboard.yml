@@ -1,0 +1,25 @@
+Title: Clear Board
+Story: |-
+  As a codebreaker
+  I want a clear board with a new code
+  In order to start making guesses on it
+Scenarios:
+  A new board:
+  - When I request a clear `board` in my game
+  - Then the next board is added to the game
+  An unfinished board:
+  - Given my new game
+  - And a new board
+  - And I post two guesses
+  - When I request a clear `board` in my game
+  - Then I get a 400 response with the board number and guesses left
+  Clear board "x" i am not the codebreaker:
+  - When I request a clear `board` in a game of another user
+  - Then I get a 400 response saying it is not my game
+  Game is over:
+  - Given an unfinished board
+  - And I fill the board and try another guess
+  - And a new board
+  - And I guess the code and try another guess
+  - When I request a clear `board` in my game
+  - Then I get a 400 response with the final rankings

@@ -12,12 +12,13 @@ steps = decorators.Steps(aliases.MAP, os.path.dirname(os.path.abspath(__file__))
 
 @steps
 class BddTester(tester.BddTester):
+    pass
+
+
+class BaseTestCase(tester.BaseTestCase, AuthenticatedApiTestCase):
+
     def not_your_game_400(self):
         response = (self.steps.outputs.get('board') or self.steps.outputs.get('guess'))[-1]
 
         assert response.status_code == 400
         assert response.json() == {'non_field_errors': ['Not your game!']}
-
-
-class BaseTestCase(tester.BaseTestCase, AuthenticatedApiTestCase):
-    pass

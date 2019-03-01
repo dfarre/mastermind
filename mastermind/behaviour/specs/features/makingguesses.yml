@@ -1,0 +1,26 @@
+Title: Making Guesses
+Story: |-
+  As a codebreaker
+  I want to get the correct feedback and scores when I post a guess
+  So that I can play on the board as game rules are followed
+Scenarios:
+  I fill the board and try another guess:
+  - When I post a `guess` with code "BYOY"
+  - And I post a `guess` with code "BYGY"
+  - Then the guess "-2" is added with feedback "FFF"
+  - And I get a 400 response from guess "-1" saying the board is full
+  - And my score is "5" against "4"
+  I guess the code and try another guess:
+  - When I post a `guess` with code "BYGY"
+  - And I post a `guess` with code "RBGG"
+  - Then the guess "-2" is added with feedback "FFFF"
+  - And I get a 400 response from guess "-1" saying I already guessed the code
+  - And my score is "9" against "5"
+  I post two guesses:
+  - When I post a `guess` with code "YBYR"
+  - And I post a `guess` with code "PYBY"
+  - Then the guess "-2" is added with feedback "CCC"
+  - And the guess "-1" is added with feedback "FFC"
+  New game "x" i am not the codebreaker:
+  - When I post a `guess` in a game of another user
+  - Then I get a 400 response saying it is not my game

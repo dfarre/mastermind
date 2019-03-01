@@ -1,14 +1,14 @@
 import setuptools
 
 
-tests_require = ['pytest', 'pytest-cov']
+tests_require = [
+    'pytest', 'pytest-cov', 'bdd-coder@git+https://bitbucket.org/coleopter/bdd-coder']
 
 setuptools.setup(
     name='mastermind',
     version='0.1',
     packages=setuptools.find_packages(),
-    install_requires=['Django', 'django-filter', 'djangorestframework', 'psycopg2',
-                      'bdd-coder@git+https://bitbucket.org/coleopter/bdd-coder'],
+    install_requires=['Django', 'django-filter', 'djangorestframework', 'psycopg2'],
     extras_require={'dev': ['ipdb', 'ipython'], 'test': tests_require},
     tests_require=tests_require
 )
