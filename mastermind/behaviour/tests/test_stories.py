@@ -60,7 +60,7 @@ class MakingGuesses(NewGame):
     fixtures = ['player_alice', 'player_bob', 'bobs_game', 'bobs_first_board']
 
     @decorators.Scenario(base.steps)
-    def test_new_game__i_am_not_the_codebreaker(self):
+    def test_new_game_i_am_not_the_codebreaker(self):
         """
         When I post a `guess` in a game of another user
         Then I get a 400 response saying it is not my game
@@ -147,7 +147,7 @@ class ClearBoard(MakingGuesses, base.BaseTestCase):
     """
 
     @decorators.Scenario(base.steps)
-    def test_clear_board__i_am_not_the_codebreaker(self, *args):
+    def test_clear_board_i_am_not_the_codebreaker(self, *args):
         """
         When I request a clear `board` in a game of another user
         Then I get a 400 response saying it is not my game

@@ -21,6 +21,6 @@ Scenarios:
   - And I post a `guess` with code "PYBY"
   - Then the guess "-2" is added with feedback "CCC"
   - And the guess "-1" is added with feedback "FFC"
-  New game "x" i am not the codebreaker:
+  New game i am not the codebreaker:
   - When I post a `guess` in a game of another user
   - Then I get a 400 response saying it is not my game

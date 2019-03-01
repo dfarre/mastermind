@@ -13,7 +13,7 @@ Scenarios:
   - And I post two guesses
   - When I request a clear `board` in my game
   - Then I get a 400 response with the board number and guesses left
-  Clear board "x" i am not the codebreaker:
+  Clear board i am not the codebreaker:
   - When I request a clear `board` in a game of another user
   - Then I get a 400 response saying it is not my game
   Game is over:
