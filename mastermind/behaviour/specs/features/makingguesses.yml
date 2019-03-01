@@ -24,3 +24,8 @@ Scenarios:
   New game i am not the codebreaker:
   - When I post a `guess` in a game of another user
   - Then I get a 400 response saying it is not my game
+Fixtures:
+- player_alice
+- player_bob
+- bobs_game
+- bobs_first_board
