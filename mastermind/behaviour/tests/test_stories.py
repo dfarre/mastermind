@@ -51,7 +51,7 @@ class NewGame(base.BddTester):
             'codebreaker': self.user.id, 'breaker_score': 0, 'maker_score': 0}
 
 
-class MakingGuesses(NewGame):
+class MakingGuesses(base.BddTester):
     """
     As a codebreaker
     I want to get the correct feedback and scores when I post a guess
@@ -139,7 +139,7 @@ class MakingGuesses(NewGame):
 
 
 @mock.patch('random.choices', return_value=list('BYGY'))
-class ClearBoard(MakingGuesses, base.BaseTestCase):
+class ClearBoard(NewGame, MakingGuesses, base.BaseTestCase):
     """
     As a codebreaker
     I want a clear board with a new code
