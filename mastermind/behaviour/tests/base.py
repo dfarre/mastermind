@@ -15,7 +15,7 @@ class BddTester(tester.BddTester):
     pass
 
 
-class BaseTestCase(tester.BaseTestCase, AuthenticatedApiTestCase):
+class BaseTestCase(AuthenticatedApiTestCase, tester.BaseTestCase):
 
     def not_your_game_400(self):
         response = (self.steps.outputs.get('board') or self.steps.outputs.get('guess'))[-1]

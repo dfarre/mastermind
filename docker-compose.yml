@@ -12,6 +12,8 @@ services:
       - db
     environment:
       - DJANGO_SETTINGS_MODULE=mastermind.settings.dev
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
   db:
     image: postgres:10
     environment:
