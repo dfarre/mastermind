@@ -98,13 +98,13 @@ class MakingGuesses(base.BddTester):
     def i_post_a_guess_in_a_game_of_another_user(self, *args):
         return self.client.post('/guesses/', {'board': 2, 'code': ['R', 'G', 'Y', 'B']}),
 
-    def i_post_a_guess_with_code_(self, *args, **kwargs):
+    def i_post_a_guess_with_code__(self, *args, **kwargs):
         board = list(filter(lambda r: r.status_code == 201, self.steps.outputs['board']))[-1]
 
         return self.client.post('/guesses/', {
             'board': board.json()['id'], 'code': list(args[0])}),
 
-    def the_guess__is_added_with_feedback_(self, *args):
+    def the_guess__is_added_with_feedback__(self, *args):
         guess_index = int(args[0])
         expected_feedback = list(args[1]) + ['']*(settings.CODE_SIZE - len(args[1]))
         response = self.steps.outputs['guess'][guess_index]
@@ -121,7 +121,7 @@ class MakingGuesses(base.BddTester):
         assert response.status_code == 400
         assert response.json() == {'non_field_errors': ['You already guessed the code!']}
 
-    def my_score_is__against_(self, *args):
+    def my_score_is__against__(self, *args):
         expected_breaker_score, expected_maker_score = map(int, args)
         game_id = self.steps.outputs['game'][-1].json()['id']
         game = self.client.get(f'/games/{game_id}/').json()

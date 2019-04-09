@@ -1,8 +1,7 @@
 import setuptools
 
 
-tests_require = [
-    'pytest', 'pytest-cov', 'bdd-coder@git+https://bitbucket.org/coleopter/bdd-coder']
+tests_require = ['pytest', 'pytest-cov', 'bdd-coder']
 
 setuptools.setup(
     name='mastermind',
