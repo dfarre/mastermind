@@ -18,6 +18,6 @@ DATABASES = {
 
 
 REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += (  # noqa
-        'rest_framework.renderers.BrowsableAPIRenderer',)
+    'rest_framework.renderers.BrowsableAPIRenderer',)
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] += (  # noqa
     'rest_framework.authentication.SessionAuthentication',)
