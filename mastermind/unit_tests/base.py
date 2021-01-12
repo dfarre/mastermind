@@ -1,18 +1,22 @@
-import django
+import pytest
 
-from rest_framework import test
+from django.core import management
 
 
-class AuthenticatedApiTestCase(test.APITestCase):
-    fixtures = ['player_alice']
+@pytest.mark.django_db
+class AuthenticatedDjangoTestCase:
     username, password = 'Alice', 'Alice'
+    db_fixtures = ()
 
-    @classmethod
-    def setUpClass(cls):
-        django.setup()
-        super().setUpClass()
-        from django.contrib.auth import models as auth_models
-        cls.user = auth_models.User.objects.get(username=cls.username)
+    @pytest.fixture(autouse=True)
+    def load_db_fixtures(self):
+        if self.db_fixtures:
+            management.call_command('loaddata', *self.db_fixtures)
 
-    def setUp(self):
-        self.client.login(username=self.username, password=self.password)
+    @pytest.fixture(autouse=True)
+    def user_login(self, django_user_model, client):
+        self.user = django_user_model.objects.create(username=self.username)
+        self.user.set_password(self.password)
+        self.user.save()
+        self.client = client
+        assert self.client.login(username=self.username, password=self.password)

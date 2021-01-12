@@ -12,6 +12,4 @@ build
 
 db.sqlite3
 
-.bdd-run-logs
-
-.msg
+bdd_runs.log*

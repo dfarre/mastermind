@@ -18,5 +18,4 @@ services:
     image: postgres:10
     environment:
       - PGPORT=5433
-    ports:
-      - 5433:5433
+      - POSTGRES_PASSWORD=postgres

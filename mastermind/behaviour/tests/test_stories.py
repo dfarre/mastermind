@@ -1,7 +1,5 @@
 import unittest.mock as mock
 
-from bdd_coder.tester import decorators
-
 from django.conf import settings
 
 from . import base
@@ -14,14 +12,14 @@ class NewGame(base.BddTester):
     In order to play
     """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def test_odd_boards(self):
         """
         When I request a new `game` of "9" boards of "12" guesses
         Then I get a 400 response saying it must be even
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def even_boards(self):
         """
         When I request a new `game` of "2" boards of "3" guesses
@@ -57,16 +55,16 @@ class MakingGuesses(base.BddTester):
     I want to get the correct feedback and scores when I post a guess
     So that I can play on the board as game rules are followed
     """
-    fixtures = ['player_alice', 'player_bob', 'bobs_game', 'bobs_first_board']
+    db_fixtures = ('player_bob', 'bobs_game', 'bobs_first_board')
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def test_new_game_i_am_not_the_codebreaker(self):
         """
         When I post a `guess` in a game of another user
         Then I get a 400 response saying it is not my game
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def i_guess_the_code_and_try_another_guess(self):
         """
         When I post a `guess` with code "BYGY"
@@ -76,7 +74,7 @@ class MakingGuesses(base.BddTester):
         And my score is "9" against "5"
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def i_post_two_guesses(self):
         """
         When I post a `guess` with code "YBYR"
@@ -85,7 +83,7 @@ class MakingGuesses(base.BddTester):
         And the guess "-1" is added with feedback "FFC"
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def i_fill_the_board_and_try_another_guess(self):
         """
         When I post a `guess` with code "BYOY"
@@ -139,28 +137,28 @@ class MakingGuesses(base.BddTester):
 
 
 @mock.patch('random.choices', return_value=list('BYGY'))
-class ClearBoard(NewGame, MakingGuesses, base.BaseTestCase):
+class TestClearBoard(NewGame, MakingGuesses, base.BaseTestCase):
     """
     As a codebreaker
     I want a clear board with a new code
     In order to start making guesses on it
     """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def test_clear_board_i_am_not_the_codebreaker(self, *args):
         """
         When I request a clear `board` in a game of another user
         Then I get a 400 response saying it is not my game
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def a_new_board(self, *args):
         """
         When I request a clear `board` in my game
         Then the next board is added to the game
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def an_unfinished_board(self, *args):
         """
         Given my new game
@@ -170,7 +168,7 @@ class ClearBoard(NewGame, MakingGuesses, base.BaseTestCase):
         Then I get a 400 response with the board number and guesses left
         """
 
-    @decorators.Scenario(base.steps)
+    @base.scenario
     def test_game_is_over(self, *args):
         """
         Given an unfinished board

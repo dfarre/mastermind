@@ -1,7 +1,7 @@
 import setuptools
 
 
-tests_require = ['pytest', 'pytest-cov', 'bdd-coder']
+tests_require = ['pytest', 'pytest-cov', 'pytest-django', 'bdd-coder']
 
 setuptools.setup(
     name='mastermind',
